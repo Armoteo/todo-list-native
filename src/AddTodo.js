@@ -9,7 +9,6 @@ export const AddTodo = ({onSubmit}) => {
       onSubmit(value)
       setValue('')
     } else {
-      //error
       Alert.alert('Введите название дела')
     }
   }
@@ -21,6 +20,8 @@ export const AddTodo = ({onSubmit}) => {
         onChangeText={(text) => setValue(text)}
         value={value}
         placeholder="Введите задание"
+        autoCorrect={false}
+        autoCapitalize="none"
       />
 
       <Button title="Добавить" onPress={pressHandler} />
