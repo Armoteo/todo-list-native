@@ -4,11 +4,11 @@ import {THEME} from '../theme'
 import {AppCard} from '../components/UI/AppCard'
 import {EditModal} from '../components/EditModal'
 
-export const TodoActivity = ({goBack, todo, removeTodo, onSave}) => {
+export const TodoActivity = ({goBack, todo, removeTodo, updateTodo}) => {
   const [modal, setModal] = useState(false)
 
   const saveHandler = (title) => {
-    onSave(todo.id, title)
+    updateTodo(todo.id, title)
     setModal(false)
   }
 
@@ -20,10 +20,12 @@ export const TodoActivity = ({goBack, todo, removeTodo, onSave}) => {
         onCancel={() => setModal(false)}
         onSave={saveHandler}
       />
+
       <AppCard style={styles.card}>
         <Text style={styles.title}>{todo.title}</Text>
-        <Button title="Ред." onPress={setModal(true)} />
+        <Button title="Ред." onPress={() => setModal(true)} />
       </AppCard>
+
       <View style={styles.buttons}>
         <View style={styles.button}>
           <Button title="Назад" onPress={goBack} color={THEME.GREY_COLOR} />

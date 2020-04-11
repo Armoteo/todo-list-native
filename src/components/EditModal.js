@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React from 'react'
 import {StyleSheet, View, TextInput, Button, Modal, Alert} from 'react-native'
 import {THEME} from '../theme'
 import {useState} from 'react'

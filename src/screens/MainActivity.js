@@ -6,11 +6,11 @@ import {Todo} from '../components/Todo'
 export const MainActivity = ({addTodo, todos, removeTodo, onOpenTodo}) => {
   let content = (
     <FlatList
-      keyExtractor={(item) => item.id.toString()}
       data={todos}
       renderItem={({item}) => (
         <Todo todo={item} removeTodo={removeTodo} onOpenTodo={onOpenTodo} />
       )}
+      keyExtractor={(item) => item.id.toString()}
     />
   )
 

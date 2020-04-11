@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React from 'react'
 import {StyleSheet, View} from 'react-native'
 
 export const AppCard = (props) => {
@@ -7,7 +7,7 @@ export const AppCard = (props) => {
 
 const styles = StyleSheet.create({
   default: {
-    padding: 20,
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: '#fff',
     borderRadius: 10,
+    marginBottom: 20,
   },
 })

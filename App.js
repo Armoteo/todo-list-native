@@ -6,6 +6,7 @@ import {Navbar} from './src/components/Navbar'
 import {MainActivity} from './src/screens/MainActivity'
 import {TodoActivity} from './src/screens/TodoActivity'
 
+//подключаем шрифты
 async function loadApplication() {
   await Font.loadAsync({
     'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -14,14 +15,30 @@ async function loadApplication() {
 }
 
 export default function App() {
+  //сщстояние для готовности подгрузки шрифтов
+  const [isReady, setIsReady] = useState(false)
+  //состояния приложения
   const [todoId, setTodoId] = useState(null)
   const [todos, setTodos] = useState([])
+
+  //Подгружаем шрифты в проект для подальшего использования
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={() => {
+          console.log('jj')
+        }}
+        onFinish={() => setIsReady(true)}
+      />
+    )
+  }
 
   const addTodo = (title) => {
     setTodos((prevTodos) => [
       ...prevTodos,
       {
-        id: Date.now().toString,
+        id: Date.now() + '',
         title: title,
       },
     ])
@@ -50,7 +67,7 @@ export default function App() {
     )
   }
 
-  const updateTodo = ({id, title}) => {
+  const updateTodo = (id, title) => {
     setTodos((oldTodos) =>
       oldTodos.map((item) => {
         if (item.id === id) {
@@ -78,7 +95,7 @@ export default function App() {
         goBack={() => setTodoId(null)}
         todo={todoScelected}
         removeTodo={removeTodo}
-        onSave={updateTodo}
+        updateTodo={updateTodo}
       />
     )
   }
