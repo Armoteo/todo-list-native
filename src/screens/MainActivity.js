@@ -1,17 +1,35 @@
-import React from 'react'
-import {StyleSheet, View, FlatList, Image} from 'react-native'
+import React, {useState, useEffect} from 'react'
+import {StyleSheet, View, FlatList, Image, Dimensions} from 'react-native'
 import {AddTodo} from '../components/AddTodo'
 import {Todo} from '../components/Todo'
+import {THEME} from '../theme'
 
 export const MainActivity = ({addTodo, todos, removeTodo, onOpenTodo}) => {
+  const [deviceWidth, setDeviceWidth] = useState(
+    Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2
+  )
+
+  useEffect(() => {
+    const update = () => {
+      const width = Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2
+      setDeviceWidth(width)
+    }
+    Dimensions.addEventListener('change', update)
+    return () => {
+      Dimensions.removeEventListener('change', update)
+    }
+  })
+
   let content = (
-    <FlatList
-      data={todos}
-      renderItem={({item}) => (
-        <Todo todo={item} removeTodo={removeTodo} onOpenTodo={onOpenTodo} />
-      )}
-      keyExtractor={(item) => item.id.toString()}
-    />
+    <View style={{width: deviceWidth}}>
+      <FlatList
+        data={todos}
+        renderItem={({item}) => (
+          <Todo todo={item} removeTodo={removeTodo} onOpenTodo={onOpenTodo} />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
   )
 
   if (todos.length === 0) {
