@@ -1,9 +1,16 @@
-import React, {useState} from 'react'
-import {View, StyleSheet, TextInput, Alert, Keyboard} from 'react-native'
-import {THEME} from '../theme'
-import {AntDesign} from '@expo/vector-icons'
+import React, { useState } from 'react'
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Button,
+  Alert,
+  Keyboard
+} from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
+import { THEME } from '../theme'
 
-export const AddTodo = ({onSubmit}) => {
+export const AddTodo = ({ onSubmit }) => {
   const [value, setValue] = useState('')
 
   const pressHandler = () => {
@@ -12,7 +19,7 @@ export const AddTodo = ({onSubmit}) => {
       setValue('')
       Keyboard.dismiss()
     } else {
-      Alert.alert('Введите название дела')
+      Alert.alert('Название дела не может быть пустым')
     }
   }
 
@@ -20,15 +27,16 @@ export const AddTodo = ({onSubmit}) => {
     <View style={styles.block}>
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setValue(text)}
+        onChangeText={setValue}
         value={value}
-        placeholder="Введите задание"
+        placeholder='Введите название дела...'
         autoCorrect={false}
-        autoCapitalize="none"
+        autoCapitalize='none'
       />
-      <AntDesign.Button onPress={pressHandler} name="pluscircleo">
+      <AntDesign.Button onPress={pressHandler} name='pluscircleo'>
         Добавить
       </AntDesign.Button>
+      {/* <Button title='Добавить' onPress={pressHandler} /> */}
     </View>
   )
 }
@@ -38,13 +46,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 15
   },
   input: {
     width: '60%',
+    padding: 10,
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    borderBottomColor: THEME.MAIN_COLOR,
-    padding: 10,
-  },
+    borderBottomColor: THEME.MAIN_COLOR
+  }
 })
